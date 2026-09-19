@@ -12,9 +12,6 @@ un soplido mediante el micrófono y muestra la decoración final.
 - Cámara web
 - Micrófono
 
-El programa no usa API keys, contraseñas ni servicios externos autenticados.
-Solo necesita permisos locales para acceder a la cámara y al micrófono.
-
 ## Instalación y ejecución
 
 Este proyecto debe ejecutarse con un entorno virtual para mantener sus

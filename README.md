@@ -1,104 +1,78 @@
-# Birthday CV
+# 🎂 Birthday CV
 
-Aplicación interactiva de cumpleaños basada en visión por computadora. Usa la
-cámara para mostrar el video en vivo, detecta la punta del dedo índice con
-MediaPipe y permite encender las velas al acercarse al pastel. Después detecta
-un soplido mediante el micrófono y muestra la decoración final.
+Un pequeño proyecto de visión por computadora que hice para mi cumpleaños.
 
-## Requisitos
+La idea es simple:
 
-- Windows
-- Python 3.11 (la versión usada en el entorno existente)
-- Cámara web
-- Micrófono
+- Mueves una pequeña llama con la punta de tu dedo
+- Acercas la llama al pastel para encender las velas
+- Sopla al micrófono para apagarlas
+- Al final aparecen decoraciones en pantalla
 
-## Instalación y ejecución
+Está hecho con **Python, OpenCV, MediaPipe, NumPy y sounddevice**.
 
-Este proyecto debe ejecutarse con un entorno virtual para mantener sus
-dependencias separadas de la instalación global de Python.
+🧰 Requisitos
+Python 3.11
+Webcam
+Micrófono
+Windows recomendado
 
-### Crear y activar un entorno virtual
+# Dependencias
+pip install -r requirements.txt
 
-Desde la carpeta raíz del proyecto, crea un entorno local. La carpeta `.venv`
-queda excluida del repositorio mediante `.gitignore`, así que cada persona debe
-crear su propio entorno en su computadora.
-
-En PowerShell:
-
-```powershell
-Set-Location "ruta\al\proyecto\birthday_cv"
-py -3.11 -m venv .venv
-& ".\.venv\Scripts\Activate.ps1"
-python -m pip install -r requirements.txt
+Ejecutas el proyecto como: 
 python main.py
-```
 
-En CMD:
+🎮 Cómo usarlo
+Coloca tu mano frente a la cámara.
+La llama seguirá la punta de tu dedo índice.
+Acerca la llama a las velas para encenderlas.
+Sopla hacia el micrófono para apagarlas.
+Presiona R para reiniciar.
+Presiona ESC para cerrar la ventana.
 
-```bat
-cd /d "ruta\al\proyecto\birthday_cv"
-py -3.11 -m venv .venv
-".venv\Scripts\activate.bat"
-python -m pip install -r requirements.txt
-python main.py
-```
+# ⚙️ Ajustes
 
-Si ya existe un entorno virtual, actívalo y ejecuta los mismos comandos de
-instalación y arranque. No es necesario usar una ruta específica: la ruta de
-`.venv` depende de dónde se haya clonado el proyecto.
+En main.py puedes modificar algunos valores:
 
-También se puede ejecutar sin activar el entorno, usando directamente el
-intérprete local:
+BLOW_THRESHOLD = 0.008
+LIGHT_DISTANCE = 60
 
-```powershell
-& ".\.venv\Scripts\python.exe" ".\main.py"
-```
+CAKE_X = 300
+CAKE_Y = 350
 
-### Si `py` o Python no están disponibles
+**BLOW_THRESHOLD**
 
-Instala Python 3.11 o una versión compatible y asegúrate de activar la opción
-para agregar Python al `PATH`. Después, abre una terminal nueva y verifica:
+Controla qué tan sensible es la detección del soplido.
 
-```powershell
-python --version
-py --version
-```
+Si no detecta cuando soplas, prueba con un valor más bajo.
+BLOW_THRESHOLD = 0.006
 
-En Windows, si PowerShell bloquea la activación de scripts, puede usarse CMD
-con `activate.bat` o ejecutarse directamente `.\.venv\Scripts\python.exe`.
+Si se activa con demasiado ruido, súbelo.
 
-## Controles
+**LIGHT_DISTANCE**
+Controla qué tan cerca debe estar la llama de las velas para encenderlas.
 
-- Acerca la punta del dedo índice a las velas para encenderlas.
-- Sopla frente al micrófono para apagarlas.
-- Presiona `R` para reiniciar el estado del pastel.
-- Presiona `ESC` para cerrar la aplicación.
+# 🎨 Personalizar los assets
 
-La sensibilidad del soplido y la posición del pastel se pueden ajustar en las
-constantes de configuración de `main.py`.
+Puedes reemplazar los PNG de la carpeta assets/ por tus propios diseños.
 
-## Assets
+🧠 ¿Cómo funciona?
 
-Todos los recursos visuales están en [`assets/`](assets/):
+El proyecto combina varias cosas:
 
-| Archivo | Uso |
-| --- | --- |
-| `background.png` | Fondo de la escena |
-| `cake_unlit.png` | Pastel con velas apagadas |
-| `cake_lit.png` | Pastel con velas encendidas |
-| `cake_blown.png` | Pastel después de apagar las velas |
-| `flame.png` | Llama que sigue la punta del dedo |
-| `corner_left.png` | Decoración de la esquina inferior izquierda |
-| `corner_right.png` | Decoración de la esquina inferior derecha |
+- OpenCV para capturar y mostrar la cámara.
+- MediaPipe Hands para detectar la mano y localizar la punta del dedo índice.
+- NumPy para trabajar con imágenes y transparencia.
+- sounddevice para obtener el nivel de audio del micrófono.
+- Un poco de lógica para cambiar entre los diferentes estados del pastel.
 
-Los PNG se cargan desde una ruta relativa al archivo `main.py`, por lo que la
-carpeta `assets` debe conservarse junto al programa.
+No se entrena ningún modelo desde cero.
 
-## Dependencias
+MediaPipe ya incluye el modelo necesario para detectar la mano.
 
-Las dependencias están declaradas en [`requirements.txt`](requirements.txt):
+## 📄 License
 
-- OpenCV: captura de cámara y ventana de video
-- MediaPipe: detección de la mano
-- NumPy: operaciones numéricas y mezcla de imágenes
-- sounddevice: lectura del nivel de audio del micrófono
+This project is licensed under the MIT License.
+
+Copyright (c) 2026 Mauricio Lozada.
